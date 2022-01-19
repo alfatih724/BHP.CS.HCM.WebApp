@@ -1,0 +1,4 @@
+﻿.mandatory::after {
+    content: " *";
+    color: red;
+}

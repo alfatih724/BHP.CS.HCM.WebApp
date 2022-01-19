@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BHP.CS.HCM.Model\BHP.CS.HCM.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BHP.CS.HCM.APIRequest">
+      <HintPath>C:\Users\HOME\Downloads\BHP.CS.HCM.APIRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="BHP.CS.HCM.Base">
+      <HintPath>C:\Users\HOME\Downloads\BHP.CS.HCM.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\pages\" />
+  </ItemGroup>
+
+</Project>

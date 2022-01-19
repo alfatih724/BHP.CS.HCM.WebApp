@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.11.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BHP.CS.HCM.Model\BHP.CS.HCM.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BHP.CS.HCM.Base">
+      <HintPath>C:\Users\HOME\Downloads\BHP.CS.HCM.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="BHP.CS.HCM.MSSQL">
+      <HintPath>C:\Users\HOME\Downloads\BHP.CS.HCM.MSSQL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>

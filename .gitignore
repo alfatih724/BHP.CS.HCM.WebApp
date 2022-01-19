@@ -1,0 +1,18 @@
+# These are some examples of commonly ignored file patterns.
+# You should customize this list as applicable to your project.
+# Learn more about .gitignore:
+#     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
+
+/.vs
+/BHP.CS.HCM.API/bin/Debug/net5.0
+/BHP.CS.HCM.API/obj
+/BHP.CS.HCM.API/Properties
+/BHP.CS.HCM.Model/bin/Debug/net5.0
+/BHP.CS.HCM.Model/obj
+/BHP.CS.HCM.Web/bin/Debug/net5.0
+/BHP.CS.HCM.Web/obj
+/BHP.CS.HCM.Web/Properties
+
+/BHP.CS.HCM.API//BHP.CS.HCM.API.csproj.user
+/BHP.CS.HCM.Web//BHP.CS.HCM.Web.csproj.user
+/BHP.CS.HCM.API/Controllers

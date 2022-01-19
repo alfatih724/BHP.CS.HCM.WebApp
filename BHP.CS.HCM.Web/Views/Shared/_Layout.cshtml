@@ -1,0 +1,179 @@
+﻿@using Microsoft.Extensions.Configuration
+
+@inject IConfiguration Configuration
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
+    <meta name="author" content="BootstrapDash">
+
+    <title>@ViewData["Title"] - BHP.CS.HCM.Web</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link href="~/lib/datatables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/lib/limonte-sweetalert2/sweetalert2.css" rel="stylesheet" />
+    <link href="~/css/azia.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <script>
+        var BaseUrl = "@Configuration.GetSection("AppSettings")["BaseUrl"]"
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.js"></script>
+    <script src="~/lib/limonte-sweetalert2/sweetalert2.js"></script>
+    <script src="~/js/azia.js"></script>
+    <script src="~/js/site.js"></script>
+</head>
+<body>
+    <div class="az-header">
+        <div class="container">
+            <div class="az-header-left">
+                <a href="@Url.Action("Index", "Home")" class="az-logo"><span></span> APPS</a>
+                <a href="" id="azMenuShow" class="az-header-menu-icon d-lg-none"><span></span></a>
+            </div>
+            <div class="az-header-menu">
+                <div class="az-header-menu-header">
+                    <a href="index.html" class="az-logo"><span></span> azia</a>
+                    <a href="" class="close">&times;</a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item active show">
+                        <a href="index.html" class="nav-link"><i class="typcn typcn-chart-area-outline"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link with-sub"><i class="typcn typcn-document"></i> Pages</a>
+                        <nav class="az-menu-sub">
+                            <a href="page-signin.html" class="nav-link">Sign In</a>
+                            <a href="page-signup.html" class="nav-link">Sign Up</a>
+                        </nav>
+                    </li>
+                    <li class="nav-item">
+                        <a href="chart-chartjs.html" class="nav-link"><i class="typcn typcn-chart-bar-outline"></i> Charts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="form-elements.html" class="nav-link"><i class="typcn typcn-chart-bar-outline"></i> Forms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link with-sub"><i class="typcn typcn-book"></i> Components</a>
+                        <div class="az-menu-sub">
+                            <div class="container">
+                                <div>
+                                    <nav class="nav">
+                                        <a href="elem-buttons.html" class="nav-link">Buttons</a>
+                                        <a href="elem-dropdown.html" class="nav-link">Dropdown</a>
+                                        <a href="elem-icons.html" class="nav-link">Icons</a>
+                                        <a href="table-basic.html" class="nav-link">Table</a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="az-header-right">
+                <a href="" class="az-header-search-link"><i class="fas fa-search"></i></a>
+                <a href="" class="az-header-search-link"><i class="fas fa-bell"></i></a>
+                <div class="dropdown az-profile-menu">
+                    <a href="" class="az-header-search-link"><i class="fas fa-user"></i></a>
+                    <div class="dropdown-menu">
+                        <div class="az-dropdown-header d-sm-none">
+                            <a href="" class="az-header-arrow"><i class="icon ion-md-arrow-back"></i></a>
+                        </div>
+                        <div class="az-header-profile">
+                            <div class="az-img-user">
+                                <img src="../img/faces/face1.jpg" alt="">
+                            </div>
+                            <h6>Aziana Pechon</h6>
+                            <span>Premium Member</span>
+                        </div>
+
+                        <a href="" class="dropdown-item"><i class="typcn typcn-user-outline"></i> My Profile</a>
+                        <a href="" class="dropdown-item"><i class="typcn typcn-edit"></i> Edit Profile</a>
+                        <a href="" class="dropdown-item"><i class="typcn typcn-time"></i> Activity Logs</a>
+                        <a href="" class="dropdown-item"><i class="typcn typcn-cog-outline"></i> Account Settings</a>
+                        <a href="page-signin.html" class="dropdown-item"><i class="typcn typcn-power-outline"></i> Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="az-content az-content-dashboard">
+        <div class="container">
+            <div class="az-content-body">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="_LookupModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title lookup-title">Extra Large Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="_TableLookup" style="width:100%;" class="table table-bordered table-hover"></table>
+                </div>
+                <div class="modal-footer text-right">
+                    <button id="_TableLookupSelect" style="display: none;" class="btn btn-primary"><i class="fas fa-check"></i> Select</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="UploadModal">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:650px">
+                <div class="modal-header">
+                    <h4 class="modal-title lookup-title">Upload File</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="file-upload">
+                        <div class="image-upload-wrap">
+
+                            <input class="file-upload-input" id="uploadImport" type='file' onchange="readURL(this);" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                            <div class="drag-text">
+                                <h3>Drag and drop a file or select file</h3>
+                            </div>
+                        </div>
+                        <div class="file-upload-content">
+                            <img class="file-upload-image" src="#" alt="your image" />
+                            <div class="image-title-wrap">
+                                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-right">
+
+                    <button class="btn btn-primary" id="UploadSubmit"><i class="fas fa-send"></i> Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="az-footer ht-40">
+        <div class="container ht-100p pd-t-0-f">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © berca.co.id</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"><a href="https://www.berca.co.id" target="_blank">BERCA HARDAYAPERKASA</a></span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+@{
+    ViewData["Title"] = "EMPL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="az-dashboard-one-title">
+    <div>
+        <h2 class="az-dashboard-title">@ViewData["Title"]</h2>
+        <div class="az-content-breadcrumb">
+            <span>Master</span>
+            <span>EMPL</span>
+        </div>
+    </div>
+</div>
+<div class="az-dashboard-nav">
+    <nav class="nav">
+        <label class="active" data-toggle="tab" href="#">Search Criteria</label>
+    </nav>
+    <nav class="nav">
+        <a class="nav-link" href="#" id="buttonAdd"><i class="fas fa-plus text-success"></i> Create</a>
+        <a class="nav-link" href="#"><i class="fas fa-file-excel"></i> Export</a>
+        <a class="nav-link" href="#"><i class="fas fa-ellipsis-h"></i></a>
+    </nav>
+</div>
+<div class="row row-sm mg-b-20">
+    <div class="col-12">
+        <div class="row">
+            <div class="col form-horizontal">
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label">Empliyee ID</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="EMPLID" onkeyup="_searchTrigger(event, searchData)">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label">First Name</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="FIRST_NAME" onkeyup="_searchTrigger(event, searchData)">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label">Last Name</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="LAST_NAME" onkeyup="_searchTrigger(event, searchData)">
+					</div>
+				</div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2"></label>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary" id="buttonSearch"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table id="tableSearchResult" class="table table-bordered table-hover mt-3 w-100"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/pages/EMPL.js"></script>
+<script>
+    var tableSearchResult;
+
+    $(function () {
+        $("#buttonSearch").focus();
+
+        tableSearchResult = $("#tableSearchResult").DataTable({
+            scrollX: true,
+            columns: [
+				{ title: "Empliyee ID", data: "EMPLID", render: function (data, type, row, meta) { return _colRenderLink(row.EMPLID, BaseUrl + "EMPL/Form?EMPLID=" + row.EMPLID + "&") } },
+				{ title: "First Name", data: "FIRST_NAME", render: function (data, type, row, meta) { return _colRenderLink(row.FIRST_NAME, BaseUrl + "EMPL/Form?EMPLID=" + row.EMPLID + "&") } },
+				{ title: "Last Name", data: "LAST_NAME", render: function (data, type, row, meta) { return _colRenderLink(row.LAST_NAME, BaseUrl + "EMPL/Form?EMPLID=" + row.EMPLID + "&") } },
+
+                { title: "Action", width: 50, sortable: false, data: "Name", render: function (data, type, row, meta) { return _colRenderDeleteAction("deleteData('" + row.EMPLID + "' )") } }
+            ]
+        });
+
+        $("#buttonSearch").click(function () {
+            searchData();
+        })
+
+        $("#buttonAdd").click(function () {
+            location.href = BaseUrl + "EMPL/Form"
+        })
+    })
+
+</script>

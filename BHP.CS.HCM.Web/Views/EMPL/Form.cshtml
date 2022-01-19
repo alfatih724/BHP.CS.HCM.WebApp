@@ -1,0 +1,121 @@
+@{
+    ViewData["Title"] = "EMPL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="az-dashboard-one-title">
+    <div>
+        <h2 class="az-dashboard-title">@ViewData["Title"]</h2>
+        <div class="az-content-breadcrumb">
+            <span>Components</span>
+            <span>EMPL</span>
+        </div>
+    </div>
+</div>
+<div class="az-dashboard-nav">
+    <nav class="nav">
+        <label class="active" data-toggle="tab" href="#">Form</label>
+    </nav>
+    <nav class="nav">
+        <a id="buttonBack" class="nav-link" href="#"><i class="fas fa-arrow-left"></i></a>
+        <a id="buttonAdd" class="nav-link" href="#"><i class="fas fa-plus text-success"></i> New</a>
+        <a id="buttonSave" class="nav-link text-primary" href="#"><i class="fas fa-save"></i> Save</a>
+        <a class="nav-link" href="#"><i class="fas fa-ellipsis-h"></i></a>
+    </nav>
+</div>
+<div class="row row-sm mg-b-20">
+    <div class="col-12">
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label  mandatory">Empliyee ID</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="EMPLID" >
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label  mandatory">First Name</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="FIRST_NAME" >
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label  mandatory">Last Name</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="LAST_NAME" >
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label  mandatory">Email</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="EMAIL" >
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label ">Date of Birth</label>
+			<div class="col-sm-4">
+				<input type="date" class="form-control" id="BIRTHDATE" >
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label ">Age</label>
+			<div class="col-sm-4">
+				<input type="number" class="form-control" id="AGE" >
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label ">Address</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="ADDRESS" >
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label  mandatory">Phone</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="PHONE" >
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label ">Salary</label>
+			<div class="col-sm-4">
+				<input type="number" class="form-control" id="SALARY" >
+			</div>
+		</div>
+
+
+        <div class="form-group row  mt-5">
+            <label class="col-form-label mandatory"></label>&nbsp;<label class="col-form-label text-secondary font-italic">mandatory field</label>
+        </div>
+    </div>
+</div>
+
+<script src="~/pages/EMPL.js"></script>
+<script>
+	var EMPLID = "@ViewData["EMPLID"]";
+
+        
+    $(function () {
+
+
+		 $("#EMPLID").blur(function () {
+			 checkEMPL($("#EMPLID").val())
+		 })
+
+
+        $("#buttonSave").click(function () {
+            saveData()
+        })
+
+        $("#buttonBack").click(function () {
+            location.href = BaseUrl + "EMPL"
+        })
+
+        $("#buttonAdd").click(function () {
+            location.href = BaseUrl + "EMPL/Form"
+        })
+
+        if (EMPLID != "" && EMPLID != null ) {
+            getEMPL(EMPLID);
+        }
+
+    })
+
+
+</script>

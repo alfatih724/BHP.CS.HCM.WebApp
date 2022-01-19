@@ -1,0 +1,164 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/admin-lte/css/adminlte.css" rel="stylesheet" />
+    <link href="~/lib/limonte-sweetalert2/sweetalert2.css" rel="stylesheet" />
+
+    <script>
+        var BaseUrl = "@Configuration.GetSection("AppSettings")["BaseUrl"]"
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/admin-lte/js/adminlte.js"></script>
+    <script src="~/lib/limonte-sweetalert2/sweetalert2.js"></script>
+    <script src="~/js/site.js"></script>
+</head>
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="@Url.Action("Login", "Home")" class="h1">Berca</a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Register a new membership</p>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Login ID" id="LoginID">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Password" id="Password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Name" id="Name">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email" id="Email">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Phone" id="Phone">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-phone"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                            <label for="agreeTerms">
+                                I agree to the <a href="#">terms</a>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button id="buttonSubmit" class="btn btn-primary btn-block">Register</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <a href="login.html" class="text-center">I already have a membership</a>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+
+    <script>
+        $(function () {
+
+            $("#buttonSubmit").click(function () {
+                submitRegister()
+            })
+
+        })
+
+        function submitRegister() {
+            $.ajax({
+                url: BaseUrl + "Home/Register",
+                type: 'POST',
+                dataType: 'Json',
+                data: {
+                    param: {
+                        LoginID: $("#LoginID").val(),
+                        Password: $("#Password").val(),
+                        Name: $("#Name").val(),
+                        Email: $("#Email").val(),
+                        Phone: $("#Phone").val()
+                    }
+                },
+                beforeSend: function () {
+                    _LoadingButton($("#buttonSubmit"), true);
+                },
+                success: function (response) {
+                    if (response.Result) {
+                        Swal.fire({
+                            title: response.Message,
+                            confirmButtonText: "Login",
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                location.href = BaseUrl + "Home/Login"
+                            } 
+                        });
+
+                    }
+                    else {
+                        Swal.fire(
+                            response.Message,
+                            '',
+                            'error'
+                        );
+                    }
+                },
+                complete: function (result) {
+                    _LoadingButton($("#buttonSubmit"), false);
+                },
+                error: function (xhr, status, message) {
+                    Swal.fire(
+                        message,
+                        '',
+                        'error'
+                    );
+                },
+            });
+        }
+    </script>
+</body>
+</html>
